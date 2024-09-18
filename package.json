@@ -6,15 +6,28 @@
   "type": "module",
   "scripts": {
     "start": "node server",
-    "dev":"nodemon server"
+    "dev": "nodemon server"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nathius262/e-commerce.git"
+  },
+  "keywords": [
+    "market",
+    "store",
+    "e-commerce"
+  ],
+  "author": "Nathius262",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Nathius262/e-commerce/issues"
+  },
+  "homepage": "https://github.com/Nathius262/e-commerce#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.3",
     "cloudinary": "^2.5.0",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "express-handlebars": "^8.0.1",
