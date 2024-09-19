@@ -13,9 +13,8 @@ import staticFiles from "./config/staticFiles.js"
 import hbs from "./config/settings.js"
 import removeTrailingSlash  from './middlewares/normalizer.js';
 
-//import crypto from 'crypto';
-//const secretKey = crypto.randomBytes(64).toString('hex');
-
+//route import
+import rootRouter from './routers/rootRouter.js';
 
 dotenv.config()
 
@@ -42,6 +41,9 @@ app.use(bodyParser.json())
 app.use(staticFiles);
 
 
+app.use('/', rootRouter);
+
+
 //middlewares\
 app.use(pageNotFound);
 app.use(internalServerError);
@@ -50,7 +52,4 @@ app.use(internalServerError);
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
-  
-  //console.log(secretKey);
-
 });
