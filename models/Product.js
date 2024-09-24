@@ -1,32 +1,26 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
-
-const Product = sequelize.define('Product', 
-    {
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        description: {
-            type: DataTypes.TEXT,
-            allowNull: true,
-        },
-        price: {
-            type: DataTypes.FLOAT,
-            allowNull: false,
-        },
-        imageUrl: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
-        stock: {
-            type: DataTypes.INTEGER,
-            defaultValue: 0,
-        },
-    }, 
-    {
-        timestamps: true,
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Product extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
     }
-);
-
-export default Product;
+  }
+  Product.init({
+    name: DataTypes.STRING,
+    description: DataTypes.TEXT,
+    price: DataTypes.DECIMAL,
+    stock: DataTypes.INTEGER
+  }, {
+    sequelize,
+    modelName: 'Product',
+  });
+  return Product;
+};
