@@ -1,17 +1,23 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
-
-const Role = sequelize.define('Role', 
-    {
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-        },
-    }, 
-    {
-        timestamps: false,
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Role extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
     }
-);
-
-export default Role;
+  }
+  Role.init({
+    roleName: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'Role',
+  });
+  return Role;
+};
