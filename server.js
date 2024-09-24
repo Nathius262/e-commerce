@@ -12,6 +12,8 @@ import {internalServerError, pageNotFound} from './middlewares/errorHandler.js'
 import staticFiles from "./config/staticFiles.js"
 import hbs from "./config/settings.js"
 import removeTrailingSlash  from './middlewares/normalizer.js';
+import sequelize from './config/database.js';
+import './sync.js'; // Sync database
 
 //route import
 import rootRouter from './routers/rootRouter.js';
@@ -49,7 +51,24 @@ app.use(pageNotFound);
 app.use(internalServerError);
 
 
+
 // Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+const startServer = async () => {
+  try {
+    // Sync database
+    await sequelize.sync({ alter: true });
+
+    // Optionally seed the database
+      // await seedDatabase(); // Uncomment if seeding is needed on every start
+
+      // Start the server
+    app.listen(PORT, () => {
+      console.log(`Server is running on http://localhost:${PORT}`);
+    });
+
+  } catch (error) {
+      console.error('Error starting server:', error);
+  }
+};
+
+startServer();
