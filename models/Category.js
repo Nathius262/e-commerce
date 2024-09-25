@@ -11,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // Many-to-Many relationship with Product
+      Category.belongsToMany(models.Product, {
+        through: 'ProductCategory',  // Junction table
+        foreignKey: 'categoryId',
+        as: 'products'               // Alias for related products
+      });
     }
   }
   Category.init({
