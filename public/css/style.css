@@ -2,7 +2,7 @@
     --grey:rgb(195, 193, 193);
     --moregrey:rgb(72, 72, 72);
     --lightgrey:rgb(228, 228, 228);
-    --main-blue:rgb(0, 0, 80);
+    --main-blue:rgb(0, 0, 0);
     --main-blue-hover:rgb(1, 1, 66);
     --secondary-blue:rgb(2, 0, 223);
     --main-red:#da1f26;
@@ -19,6 +19,43 @@ body{
     display: none !important;
 }
 
+/*HERO BANNER*/
+/* Ensure the video covers the entire hero section and is behind the content */
+.hero-banner {
+    height: 80vh;
+    overflow: hidden;
+    position: relative;
+    background-color: #000000db; /* Fallback color */
+    z-index: -2;
+    display: flex;
+    align-items: center;
+}
+
+.video-container {
+    position: absolute;
+    top: 80;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video covers the area without stretching */
+    opacity: 0.8; /* Optional: to darken the video for better text visibility */
+}
+
+.hero-banner .container {
+    z-index: 999;
+    position: relative;
+}
+
+.hero-banner h1, .hero-banner p {
+    color: #fff; /* Ensures text remains visible on the video */
+}
 
 #sidebarMenu{
     background-color: var(--main-blue);
@@ -343,6 +380,46 @@ del.original-price {
     display: none
 }
 
+/* Featured Items */
+.featured-items .card {
+    border: none;
+    position: relative;
+    transition: transform 0.3s ease;
+    width: 100%;
+    height: 400px; /* Set the height of all image containers */
+    margin: 0; /* Ensure no margin around the image container */
+    overflow: hidden; /* Hide any overflow */
+}
+
+/* Featured Items */
+.featured-items .card img {
+    object-fit: cover; /* Ensure the image covers the container without stretching */
+    width: 100%;
+    height: 100%; /* Make sure the image height fills the container */
+}
+
+.featured-items .card:hover {
+    transform: scale(1.05);
+}
+
+.featured-items .card-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 15px;
+    color: var(--white);
+}
+
+.featured-items .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.featured-items .btn-light {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+
 .action button{
     border: 2px solid var(--main-blue);
     color: var(--main-blue);
@@ -428,12 +505,6 @@ del.original-price {
     font-size: 18px
 }
 
-@media(min-width: 768px) {
-    .mailinglist-submit i {
-        display:block
-    }
-}
-
 .btn-default.mailinglist-submit:hover,.btn-default.mailinglist-submit:focus {
     background-color: #464646!important;
     color: #fff!important;
@@ -462,116 +533,17 @@ del.original-price {
     .maillist-options {
         text-align:left
     }
-
-}
-
-.site-footer li a{
-    color: var(--moregrey);
-}
-.site-footer li a:hover{
-    color: var(--main-red);
-}
-.subscribe input[type=radio] {
-    margin: 0;
-    vertical-align: middle
-}
-
-.subscribe label {
-    margin: 0;
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 600;
-    margin-left: 3px;
-    color: var(--moregrey);
-    cursor: pointer;
-    text-transform: none
-}
-
-.social-icons {
-    width: auto;
-    float: none;
-    margin: 8px 0;
-    padding: 0!important;
-    text-align: right;
-    color: var(--moregrey)
-}
-
-.social-icons li {
-    margin: 2px 4px!important;
-    padding: 0
-}
-
-.social-icons li a,  .social-icons li a i{
-    color: #464646 !important;
-    background-color: transparent;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 0;
-    display: block;
-    text-align: center;
-    font-size: 24px;
-    font-weight: 400;
-    border: none;
-    padding: 0!important;
-    text-decoration: none
-}
-
-.social-icons li a:hover, .social-icons li a i:hover {
-    color: var(--main-red) !important;
-}
-
-@media(min-width: 992px) {
-    .social-icons {
-        margin:0 0 12px
+    .floating-cart {
+		top: 50%;
+	}
+    .mailinglist-submit i {
+        display:block
     }
 
-    .social-icons li {
-    }
-
-    .social-icons li a {
-    }
-}
-
-.social-icons li a:hover {
-    opacity: 1;
-    border-color: #2a2a2a;
-    color: #2a2a2a
-}
-
-
-@media(min-width: 768px) {
-    .site-footer {
-        padding:50px 0 0
-    }
-}
-
-.footer1 {
-    padding-bottom: 40px;
-    margin-bottom: 45px;
-    border-bottom: 1px solid #e9e9e9
-}
-
-
-
-.site-footer .col-sm-9>.row>.col-md-3.col-sm-6:nth-child(3) {
-    clear: both
-}
-
-@media(min-width: 992px) {
-    .site-footer .col-sm-9>.row>.col-md-3.col-sm-6:nth-child(3) {
-        clear:none
-    }
 }
 
 
 /*CART SECTION*/
-@media(min-width: 768px) {
-
-	.floating-cart {
-		top: 50%;
-	}
-}
 .floating-cart {
     position: fixed;
     top: 75%;
@@ -605,4 +577,171 @@ del.original-price {
     margin: 5px 0 0;
 
 
+}
+
+
+
+/* Greatness Section Styling */
+.greatness-section {
+    background-image: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQA2wMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAADAQIEBQYAB//EAEEQAAEEAAQDBgMFBAcJAAAAAAEAAgMRBBIhMQVBUQYTImFxkTJCgRRSocHRQ7Hh8SMkU2JykvAHFRYzNGOCorL/xAAaAQACAwEBAAAAAAAAAAAAAAAAAQIDBAUG/8QAKREAAgEDAwQBBAMBAAAAAAAAAAECAxESBBMhBTFRcSIUM0GxNEJhMv/aAAwDAQACEQMRAD8A8k4cxneuJ0rQC1ZmLoqrAP8A6SjqSfVX7IzWqzTk0zXCKkiM1padkaO0UxeSRrVBzuTUbMLGMwpwtGGHLgRyK7DtBpWUMYoWFnnUwNMKWRVGKSA+LUI0WHEwtuiu2QMlYWltoUfDS2YGLfoq/qY/nhln0zXobgcDLuAQCpRwjg6i2j6K54dEWNyyjQ7WkxchiIr5TVnYjoubLUTnNpG+NKEI8lZFhntI0sKfBDXiqrQpcYwfAwNN7gpWY3MAqKkaj5aNNOpBcJkt8AcDSrcRh8r1ZMxLdideijyESSaKqnnF8lkpJlZLFpShzxEDQb7q/OHB1NJk2DDmeFuq20q6TMdWnczfd6Hn6qDiWDWgtDPgnu+Fmyq8Zhe79ei6unmmzk6iLSM5OzxFRXNVnOzXZRnRLuU0rHEqPkiZUhb5KV3fkkMfkrSm5FyrsqkOY1otxAHUrjH4bGyg7EiI7RMJF1zRZaEjY+Z2QYxmxJG/TRVORJIR7fCdaUBzHWVZzu7t4jDMziojmxZjmBB50oSZOHATBxSFwe0hoB3sLXYdju7bnaboLM8NfFHOyQ1odQVrouI4bOyKWy53wkjYLDWbOjRaGz4eR0B+zgGSxQJpV8EcpxOXFQ53N3Md2B6LWPwLJcLI6J4La012VHg+DGbGiNspYXDORkLQD0WNVUk7s6EYXa4JLcIAA5l3y0UmIPZo4WrWeGDAxxDFStGYhgc/r5lF+xxu+E35g2FklXuuUX7eL4IMDiHDkrJrmvZYyhw8k+HAgnYn6Kc3hoczRp0WGrVi2aItpdzsFxHDhgZjQM3J2W7UDFtZjXkxPZdmjVZh1UmDBEy5Ht0HMqww/C8KHZvC4AbbKMZU6Uso3KZ3krMzn2DEMGWUN8iAE7D4XNpsQtY6NlBgh8BG26WPhEcnjiz0d2uCteolNclatAoGYDOC19B3JMOFkidQFjyWwZwk1VBI7hrQaNLNnJd0Xb8TLxwPeRbaCnxQtaMrgrr7CA2hSjuwOuhVbnkG6mQJsDEYyWgDRZPjGEOc1oFuJME4t+IeWqpcZw97jqt+hqYyvczah5wsefS4M2eaAcE/kFtJODuJukP/AHNJ8rDXmvSx1qSOG9NdmLdhnD5VzcKXb6ea2zeBk7tcfomT8ObhYnymMnI0mq3R9dfhAtH+WeV4/PLinRW3IDvZquqncNwsvdGV7j3Y0Da3U1/2DiUrYMPH9nxDyfC5vh5+Hz2HupOIkeyGTBh8Mj9CHtIaTrqOVKW6wdJFHJhwybO+TJmccpf0+iNhMFJH3s3eNLWauptl4q0CGB8uJaMS8MY3MS4mwP1KsOEYzB4QTMnBdGRpmZZI9EZ2BUirfBicUe9ijsVmbYqm/moLg4kktDT0Whx/FME+EQ4GNzGN0FtrlsqJxaTZGp80ZtktoC1HixMjHNdebLtaY2CQEBzSLSvge0OLRbW70pOKYF3D2inijjZE90eWySOZ3tAk45jJJC44h2pvQ0bVPTst0ksgg0qVQh4Ld2fk0T+I4zFYdjcSXShmozk0PO1suE8eZh+HMDommV33iA0H03pebQ4qUCg92o0AUqHiEkZDHaBZa2lyVki6nXku7PbeGYnC48DupGteSQGE6mgD+au8PhnN2AP1XhvDu0H2aaIvAytdpVgr0Lg3+0HC02PFDMd82aj7LkajQzi+xqjXujaPwYdqWgJ0XDGZrGhVRB214TP4WuOcfK4VaFiO3HD8LiC0xTmO/jDDqsToVFwkNybNXHgWAattGbhgz4GgKij7W8HfGHMxjCTsz5vZTOHcdwvEYO+wsltuiDuPUKV3Tjdoqamy4bGcoytpK/Chw1Gvko8GJa4jxuVpHEHx5rWjTtahuMUZ5ylB8lTJg63soJhaNAD7KwnlEZI3CjGdt6ELDLHJpF8JSauQXxWfgd7KNJhwTZaQOpCnYniOFw0Ek00sbWRtLnEuAFD/AEFScfxeBmkw8h4myJsRDwBTgbOh/BX05yj2Q7NvkJII2nLls77LOx8RxM3as4SJ7HYdrcvcgVy1J53de6HxztNgoccMVhJ35g3K1zgKb1IvU+iw0naOduJkmbKTM95c5zBlu910aUak0RcYo1fbHjL4OLYbCNk7qGM5pDHd5vu1evp5qpwHafDwDiEPE55JjJJ4BGHUWkee3p5LNY7izsTb5Ghzi69dbd6qsY0ud3krvE7eyt1Ki8fl3It8huIui797sG57Wl5c0uqwOmiisvLlZZPmEQxOkdmLmgdE58YDQMwryWpKysQxVyO59NLXPII1oIYbI4aRkN5kor/DmNgN5D9UB07idSSPXdTSE7I7KT08qTfBzolcZKaRVnkOi4ZK2HupkLk6WZj2gspxPNpr+SEWF7bblY4H4h83qFEa6Rnij1s5aHNHbO5zHWzMeoU2ym6GmEPbnFh1W4Hb6ILmAuytY4nlqj4h81NcGtaL1I/BM718jstZcu1BK6C6BMjcDqDSksjiy+IvaeTtwkcXOLWlgAJ6bo32N5BNGuVnRJyiu4XSA9yKvML15ogcxgAdKHX81XSMcGw/8yZlHkljwcRlp02Y1WWNl39OqhnAkpnDETQODoyfIhS4ON4oEsaHu/uk6KZhuGYl0IbDgp3VsZGZSfelYYDs3xCR5MuFw8fTx2fYAqlxUv6klVZUO40HlzMS1wO7S00R+q0XYjtBheD4ibETOz4R7A14zU4EHcDmpmG7CEm5pYW2bP8ARXXuVYRdheERkfaMVKb+WNjAD+BUHQjJWsS3ZJ8Mu4e3/DHtbLBhsWYiNHnL+q1vCO0mH4jBeFxLMoaC7PplWIw/ZrgWFILY8Q6tRnmIr6ClNhfw7BOc3B4Njc5yPJcSXbmlGnpIU3ko2FnKfDHce7bsw7MsHd97qS55ttDp1WN/484vchMscLXvJtwBNVpV7DyWjn4bwDHgPkweQ5aGWV2n0KrZuyfA5nlzZZ2P6ODCP/lH0aXKig3n5MdjO078Q2WLvJ5GvbRBJA3VVieOYuRghYQ2tyRyWzxfYxsTicHiYBm5Phv8bVRN2VnwxsYWOUONuIcdfRWqhGP9RbrZm2PdNI0GaQvJry/gi46AYWJrWnM4/EQbVj9kdhczZeHyMAN3V0oZxOGaXOdCAb0JtLNp8RJbqSKtrZfiykjpSd3cg8bg76K1+2xSNJc1rQKoAJomGIssyhvMlPdl4Kd5JlZmduNEzNJeb8VYyQQNBuXbkSmVhhAGnVxF3fNTzT/BbuKxXSOLzv6rnEV4RR9UV8QPwHfZM7p2YA7qxNEc0wWw1G/NJTPNHeHMNAZkBzZLOleVJpoWSJTGxsOpsXsnSYhjT4Wp8fCh+1xDq/uhTYOHYZnyOf5uNpbfkpsVjcW1xIyZz0ClwR4yUDucE8A8yK/ermCNkVd2xrPNopWmHweIe0PewsYf2khyg+l7p7cR4ooYuDYuQf0ssUddNaU/D9nIc1z4qZ56Npn6q7hggZWeV0lfLE2h/mP6KwgLWAd3Gxg6kZj+KMYoaRV4Ps1w808YESAH45DY9yVfYTh0MIGRsTB/22b/AF0Sd6M1yOLz1cUv2oAeEoJWLGOOOP5R9Tf6JxxccQoAKpdiS7QX7oefmSVEZauxr3aXQQjiTeptV5nAGhQnz+akInzYygaQWzEOwbtjLOSb6VX6qrmnc403UnZSsY7u+IcPhHyBoPuqK0u0fZfRXd+hzcU6KV7CfhcRujOxIkG6r+I+DHzDlmv31Q2y1ry5rTSllBMoqRxm0WQxTmaZrHROGMab1IJ6KuL72QnvrmrCBZSSxvFPaHHqND+igYnBYTEiiIyekraPug98RzTXTWN9U7CIGP4Dh78UTor2c3Y+nJVE3BZGW3D4kAdHhaNuJkiJ7t7mg7gHQ+o5pj8VFJpPAP8AFEcp9tj+Ci6cQuYrE8Nx0Zsszjq0qGXPY7K8PsdQdFujh4ZD/V8Qw38soyH99fioeMwz4vBiISOmduh9DsUnAfBl2SEU55y1tojmYPNAC/Lkp02AwryaiynnlNKHPw2gO5lOnJ237lW6YCFzQ5ridtfVOfNHmOyhyYTEx7NzD+6UHLP/AGTvZQ2hWNVFgcRlDpgyBh5zOy/hupMcWDiFOkkxTuWQZG+51/AKsY4k5nEl3UnVSGOV4y3ixbo/+njjgP3mNt3+Y6+yK1xc7PJb3HdzjZ91WMmAoorZvNIkW8cwA306IgxIA5qnE5Ju9ERkr3bbeqVgLT7QToCU5ribs6qCx1AaE6o4kDTzsJDJmYhIZVE769jomOlrlr0RYCU6TzQXy1zQXSWNdCgvkHQp2Am4Fve4+Fu4zX7InEJL48yjpGWD8/zS9nmF000vJoDB6k3+Sr8bIHcYe6/29exA/JYZPOvJeF+zZFYUIvy/0WXHhlxzHffZ+4qCx+9qw7SeJkLx95zL6KmzlpI6LRopZUIlGrVqzJQlo0ke+1HL81eS7PYK1GYc56C5/mucUF5UgHOkQXya66LnFCc7qgRzna2lixs8ALY5XZTux2rT6g6ILj0QXFAE44rDSisRhshO74DX/qdEw4Rsw/qmIilP3HeB/sdPYqvc43dlDc4HfVRsMkTxS4d2WaN8buQcKtAsdB7o0PEcTC3I2XPH/ZSAPYfoU/7bhzq7h7L55ZHAe1oAAx6K2TzUNrkRrlEZNa8VsiNc76KGxwtHY/6JDJkZ0R2u25qFG8bXSK2Wjy9UDJpfYGqd3ihNeSK5hOEnr7pWC5N7yvI+STPajZjVN2s/klL6NDbqmAZz/VCdIeqY5+mqHmzEAakmh6obtyC5NZwBndcPbIf2hzfTYLL94XYoPLgSZc2vra1bqwvD3Afsoj+ApY3ZzXbU5q5uk+bqTOjq1goRNPx1+fAE1Rjka6+t6fms+XEcz7rQ8RyycPxQv5CfaissH7k6WrOnO8GinXr5p/4SGSeKi7lpS4uI2UUE5gdtEVztPQLomEKX2dLQnOQi7LofwTXP2pMBz3IZdoke7X1QXlADy6kNxvRMzJC5FwEeguRCSUNx0SuAxyZZ6lK4ptlAD2uRGuUdrkRpURkhp5orHfX1UZjkRp19UgJTH0SAPoi2R120UQGzRNAGrRRemt6pgSQRqXOIHqnBwGgcSAgNNAFOLqAoAj0QBIzjnv6Lu9DhobCAHeIi+f8AopSaGh+hQAV0nQeuqPwxnf8AEYGEaXmd6DVQnEgWBauOzEd4qaY/IwMaPU2f3D3VGpnhSkzRpYZ1Ui54vKIuFYhx+7QPW9Asb3hsEWDex9f5rTdpZQ3heUmu8laB9LP5LJykBjiLFjryWXp8bUmzT1CV6yXg9AfG2RkjXV4m1p6UsKHPD8rhYHh21W2bIWmN0YJsUARpXoSFj+Ix91xHEMBsNkJ191X06VpyRPqEfhFgnHNuedJA8gEbtHNNJ8qN2E3QDQnXYeS65yhzjdG7Ne6QPJFBITe5II2ooZJ10G6AFe5DLtVxdv5IRcRqgDi7UphclLr5oRPsgB2YppKaXBNLkgFJTc3kkJTbQA5prpXmiD9/XZCB1Hn5pwN7JDDNcByRAdihMJ08kRrt2+ZKADNI8xfTdEadTplA0BO6ACLFH4TrSeCWCyBXWrQIO0m7zBOYfEW3RPMoYc4g+Lkdufkmh5sDTXbqgYXV4yWbOm+6cXBxJq+laUhADrRA36jVdn2cOXIoAJn1AsLU9nGiPhrXGrlJdr02/JZJ7vlHPauZW5w0YhgiiabDGBo+gXN6lP4KPk6XTYXk5P8ABUdq3nusNGSazudWnIV081mZHnIddwVe9qn/ANbw7b8LYzX1P8FQSE60RZsK/RRtRRn1sr1mehCzDC4EmmNoXpdLK9omd3xSUn9oxrqArlX5LR4Ug4KEMZ3dsDiANtFQ9qQ4YjDuId4mZboDY/xXP0Lar2OhrUnQuVo3HLRDcTmGUWbSWctaH0XSOsCiP9fzXdOGc5xG1IRLjyB5JXmiBdn0TXHW+XqgY0uFnomOuuoKR1a6nWkma2j3QBxQydKTg4Eg37Ibt0gEKZacSh3ogBb11KXTqmE+n0TbQAUAF3/jafGBl/xbrlyQx4GWiOqIzYnoVy5AhcxY5hCeNG310XLkAEYSHOaDo0ikrzTnUPquXIAc/SMHqCVzdWu9T+S5cgA3DGB/EMMHf2rf1/JbfmuXLkdR/wC0dnpv2pezJdqNeL5STXdZvTdVDuWp1/ikXLfpfsx9HP1X3pezdYFrWcOgprfEGE6bk81V9qQHYSCQ/EHEX5UuXLk6f+QvZ1tR/HfooYmjKN90xttBsl1O0zctVy5d9HnxNBJoBuB9LSFoaNORI/FKuTGR2kNJIaNV1Zq1I22XLkgGWbsGt9kzkuXIEdSCUi5IY2020q5AH//Z'); /* Replace with your image URL */
+    background-size: cover;
+    background-position: center;
+    height: 400px; /* Adjust height as needed */
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    position: relative; /* Needed for overlay */
+    color: #fff; /* Text color */
+    text-align: start; /* Align text to the start */
+}
+
+/* Overlay for better text visibility */
+.greatness-section .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px; /* Optional padding */
+}
+
+/* Text Styling */
+.greatness-section h1 {
+    font-size: 3rem; /* Adjust font size as needed */
+    margin: 0;
+}
+
+.greatness-section h2 {
+    font-size: 1.5rem; /* Adjust font size as needed */
+    margin-bottom: 20px;
+}
+
+/* Footer Styling */
+.footer {
+    background-color: #f5f5f5; /* Light grey background */
+    border-top: 1px solid #ccc; /* Top border */
+}
+
+.footer-section {
+    border-right: 1px solid #ccc; /* Right border for the first column */
+    padding-right: 10px;
+}
+
+.footer-section h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.footer h5 {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.footer ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+}
+
+.footer ul li {
+    margin-bottom: 10px; /* Spacing between list items */
+}
+
+.footer ul li a, nav ul li a{
+    text-decoration: none; /* Remove underline */
+    color: #000; /* Black text */
+}
+nav ul{
+    list-style-type: none;
+}
+
+.footer ul li a:hover, nav ul li a:hover{
+    text-decoration: underline; /* Underline on hover */
+}
+
+
+.newsletter-section .btn {
+    background-color: #000; /* Black background */
+    color: #fff; /* White text */
+}
+
+.newsletter-section .btn:hover {
+    background-color: #fff; /* White on hover */
+    color: #000; /* Black text on hover */
+}
+
+
+.newsletter-section input{
+    width: 50%;
+}
+
+/* Custom accordion styles for the footer */
+
+/* Override the card-header background color and border */
+.custom-accordion .card-header {
+    background-color: transparent; /* No background color */
+    border: none; /* No border */
+    padding: 0.75rem 0rem; /* Adjust padding to fit your layout */
+}
+
+/* Custom button for the collapse toggle */
+.custom-accordion .btn-link {
+    color: inherit; /* Use the inherited color (footer text color) */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold;
+    text-align: start;
+}
+
+.custom-accordion .btn-link:hover {
+    color: #333; /* Define a hover color */
+    text-decoration: none;
+}
+
+/* Remove default card-body background and border */
+.custom-accordion .card-body {
+    background-color: transparent; /* No background for the card body */
+    padding-left: 1rem; /* Add some padding if necessary */
+    line-height: 2.1;
+}
+
+/* Change the border for collapsed card */
+.custom-card {
+    border-top: 1px solid black; /* Remove border from the card */
+}
+
+/* Collapse icon styles */
+.custom-accordion .fas {
+    color: inherit; /* Icon inherits text color */
+    font-size: 1rem;
+}
+
+/* Custom styles for collapse sections */
+.custom-accordion .collapse.show {
+    background-color: transparent; /* No background when expanded */
+}
+
+/* Icon rotation (toggle between plus and minus) */
+.custom-accordion .btn-link.collapsed .fas {
+    transform: rotate(0deg); /* Plus sign by default */
+    transition: transform 0.2s;
+}
+
+.custom-accordion .btn-link:not(.collapsed) .fas {
+    transform: rotate(45deg); /* Minus sign when expanded */
+    transition: transform 0.2s;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer-section {
+        border-right: none; /* Remove right border on small screens */
+        padding-right: 0; /* Remove padding */
+    }
+    .newsletter-section input{
+        width: 100%;
+    }
 }
