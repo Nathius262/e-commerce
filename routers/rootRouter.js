@@ -1,9 +1,10 @@
-import { indexPage } from "../controllers/root.js";
 import { Router } from "express";
+import { index_view } from "../controllers/rootController.js";
 
-const router = Router()
+const router = Router();
 
-router.get('/', indexPage);
+router.route('/')
+    .get(index_view);
 
 
-export default router
+export default router;
