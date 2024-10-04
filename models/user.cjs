@@ -11,24 +11,26 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // A User belongs to a Role
-      User.belongsTo(models.Role, {
-        foreignKey: 'roleId',
-        as: 'role'
+      User.belongsToMany(models.Role, {
+        through: 'UserRole',  // Junction table
+        foreignKey: 'userId',
+        as: 'roles'
       });
     }
   }
   User.init({
     name: DataTypes.STRING,
-    username: DataTypes.STRING,
-    email: DataTypes.STRING,
-    roleId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'Role',
-        key: 'id'
-      }
-    }
+    username: {
+      type: DataTypes.STRING,
+      unique:true,
+      allowNull:false
+    },
+    email: {
+      type: DataTypes.STRING,
+      unique:true,
+      allowNull:false
+    },
+    password: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'User',
