@@ -1,37 +1,37 @@
 {
-  "name": "ecommerce_website",
+  "name": "gadget_gallery",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a full-featured e-commerce website designed for selling phone and laptop accessories. The backend is built using **Node.js** with **Express** and **Sequelize ORM**, rendering HTML with **Express Handlebars**.",
   "main": "server.js",
-  "type": "module",
   "scripts": {
-    "start": "node server",
-    "dev": "nodemon server",
-    "migrate": "npx sequelize-cli db:migrate",
-    "migrate:generate": "npx sequelize-cli migration:generate --name",
-    "migrate:undo": "npx sequelize-cli db:migrate:undo",
-    "migrate:undo:all": "npx sequelize-cli db:migrate:undo:all"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Nathius262/e-commerce.git"
   },
   "keywords": [
-    "market",
-    "store",
-    "e-commerce"
+    "gadget",
+    "gallery",
+    "gadget-gallery",
+    "e-commerce",
+    "online-platform"
   ],
-  "author": "Nathius262",
+  "author": "nathius262",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Nathius262/e-commerce/issues"
   },
   "homepage": "https://github.com/Nathius262/e-commerce#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.7",
+    "sequelize-cli": "^6.6.2",
+    "sqlite3": "^5.1.7"
+  },
   "dependencies": {
     "bcrypt": "^5.1.1",
-    "bcryptjs": "^2.4.3",
-    "build": "^0.1.4",
-    "cloudinary": "^2.5.0",
+    "cloudinary": "^1.41.3",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
@@ -40,13 +40,9 @@
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
+    "multer-storage-cloudinary": "^4.0.0",
     "path": "^0.12.7",
     "pg": "^8.13.0",
     "sequelize": "^6.37.3"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.5",
-    "sequelize-cli": "^6.6.2",
-    "sqlite3": "^5.1.7"
   }
 }
