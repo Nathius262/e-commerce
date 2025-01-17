@@ -19,8 +19,8 @@ const require = createRequire
 import adminSeeder  from './seeders/admin-seeder.cjs'; 
 
 //route import
-import adminRouter from './routers/admin/adminRouter.js';
-import rootRouter from './routers/rootRouter.js';
+import adminRouter from './routers/admin/router.js';
+import rootRouter from './routers/router.js';
 
 
 dotenv.config()
