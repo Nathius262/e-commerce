@@ -11,11 +11,11 @@ export const loginAdmin = async (req, res) => {
     try {
         const admin = await db.User.findOne({
             where: { email },
-            attributes: ['id', 'name', 'email', 'password', 'createdAt', 'updatedAt'], // Include password in the result
+            attributes: ['id', 'email', 'password'], // Include password in the result
             include: {
                 model: db.Role,
                 as: 'roles',
-                where: { role_name: 'admin' }, // Ensure the user has the admin role
+                where: { name: 'admin' }, // Ensure the user has the admin role
             }
         });
 
@@ -47,7 +47,7 @@ export const loginAdmin = async (req, res) => {
         
 
         // Create and send JWT token here after successful login...
-        res.status(200).json({ message: 'Login successful'});
+        res.status(200).json({ message: 'Login successful', isAdmin:true});
 
     } catch (error) {
         console.error("Error logging in admin:", error);
