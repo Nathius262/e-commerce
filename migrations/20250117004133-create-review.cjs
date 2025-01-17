@@ -1,33 +1,37 @@
 'use strict';
-
 /** @type {import('sequelize-cli').Migration} */
-
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('UserRole', {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('Reviews', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      rating: {
+        type: Sequelize.INTEGER
+      },
+      comment: {
+        type: Sequelize.TEXT
+      },
       userId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
-          model: 'Users', 
-          key: 'id'
+          model: 'Users',
+          key: 'id',
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
       },
-      roleId: {
+      listingId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
-          model: 'Roles', 
-          key: 'id'
+          model: 'Listings',
+          key: 'id',
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,
@@ -39,8 +43,7 @@ module.exports = {
       }
     });
   },
-
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('UserRole');
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('Reviews');
   }
 };
