@@ -60,14 +60,14 @@ async function seedAdmin(queryInterface, Sequelize) {
     
     // Insert roles if they don't exist
     await queryInterface.bulkInsert('Roles', [
-      { role_name: 'admin', createdAt: new Date(), updatedAt: new Date() },
-      { role_name: 'staff', createdAt: new Date(), updatedAt: new Date() },
-      { role_name: 'user', createdAt: new Date(), updatedAt: new Date() }
+      { name: 'admin', createdAt: new Date(), updatedAt: new Date() },
+      { name: 'seller', createdAt: new Date(), updatedAt: new Date() },
+      { name: 'buyer', createdAt: new Date(), updatedAt: new Date() }
     ], { ignoreDuplicates: true });
 
     // Fetch the roles from the database after insertion
     const [roles] = await queryInterface.sequelize.query(
-      `SELECT id, role_name FROM "Roles" WHERE role_name IN ('admin', 'staff', 'user')`
+      `SELECT id, name FROM "Roles" WHERE name IN ('admin', 'seller', 'buyer')`
     );
 
     // Check if the admin user exists
@@ -78,8 +78,8 @@ async function seedAdmin(queryInterface, Sequelize) {
     if (existingAdminUser[0].length === 0) {
       // Insert admin user if it doesn't exist
       await queryInterface.bulkInsert('Users', [{
-        name: process.env.USER_ADMIN_NAME,
-        username: process.env.USER_ADMIN_USERNAME,
+        first_name: process.env.USER_ADMIN_FIRST_NAME,
+        last_name: process.env.USER_ADMIN_LAST_NAME,
         email: process.env.USER_ADMIN_EMAIL,
         password: hashedPassword,
         createdAt: new Date(),
@@ -91,15 +91,15 @@ async function seedAdmin(queryInterface, Sequelize) {
         `SELECT * FROM "Users" WHERE "email" = '${process.env.USER_ADMIN_EMAIL}'`
       );
 
-      // Associate the admin user with all roles in the UserRole table
-      const userRoles = roles.map(role => ({
+      // Associate the admin user with all roles in the s table
+      const ss = roles.map(role => ({
         userId: adminUser[0].id,
         roleId: role.id,
         createdAt: new Date(),
         updatedAt: new Date()
       }));
 
-      await queryInterface.bulkInsert('UserRole', userRoles, {});
+      await queryInterface.bulkInsert('UserRoles', ss, {});
       console.log('Admin user and roles successfully created.');
     } else {
       console.log('Admin user already exists. Skipping user creation.');
