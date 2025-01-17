@@ -31,6 +31,11 @@
 
         <link href="css/style.css" rel="stylesheet">
 
+        <script>
+            //global script
+            let title, message, redirectTo, classType, btnType;
+        </script>
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         
@@ -43,9 +48,11 @@
 
         <!--============ROOT SECTION==============-->
         <section id="root" class="position-relative overflow-x-hidden">
+            {{#if (notEqual admin true)}}
             <!--=========HEADER BEGIN===========-->
             {{> header }}
             <!--=========HEADER END===========-->
+            {{/if}}
             
             <!--=========MAIN BEGIN===========-->
             {{{body}}}
@@ -93,9 +100,29 @@
                 <div class="clearfix"></div>
             </div>
 
+            <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="successModalLabel">Success</h5>
+            <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body" id="modal-message"></div>
+        <div class="modal-footer">
+            <button class="btn" id="close-modal" type="button" data-bs-dismiss="modal">ok</button>
+        </div>
+    </div>
+</div>
+</div>
+
+            {{#if (notEqual admin true)}}  
             <!--=========FOOTER BEGIN===========-->
             {{> footer }}
             <!--=========FOOTER END===========-->
+            {{/if}}
         </section>
         <!--============ROOT SECTION END==============-->
 
