@@ -1,11 +1,14 @@
 import { verifyToken } from '../helpers/authHelper.js';
 
+
 // Middleware to protect admin routes
 export const adminAuthMiddleware = (req, res, next) => {
   const token = req.cookies.token; // Get token from the 'adminToken' cookie
 
   if (!token) {
-    return res.status(401).json({ message: 'Access Denied: No Token Provided' });
+    //res.status(401).json({ message: 'Access Denied: No Token Provided' });
+    return res.redirect('/admin/login');
+
   }
 
   try {
@@ -18,6 +21,7 @@ export const adminAuthMiddleware = (req, res, next) => {
     req.user = verified; // Attach the user data to the request
     next();
   } catch (error) {
-    return res.status(400).json({ message: 'Invalid Token' });
+    
+    return res.status(400).redirect('/admin/login') //res.status(400).json({ message: 'Invalid Token' });
   }
 };
