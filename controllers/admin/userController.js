@@ -40,8 +40,10 @@ export const getUserById = async (req, res) => {
 export const createUser = async (req, res) => {
   try {
     const newUser = await createNewUser(req.body);
-    res.redirect('/admin/user', {admin:true}); // Redirect to user list
+    res.json({message:'user created successfully', redirectTo: '/admin/user', admin:true}); // Redirect to user list
   } catch (error) {
+    console.log(error)
+    console.log(error.message)
     res.status(500).json(error);
   }
 };
@@ -50,16 +52,16 @@ export const createUser = async (req, res) => {
 // Controller for updating a user and their roles
 export const updateUserById = async (req, res) => {
   const { id } = req.params;
-  const { email, username, is_staff, is_admin } = req.body;
+  const { email, first_name, last_name, is_seller, is_admin, address, p_country, p_state, p_city} = req.body;
 
   try {
     // Update the user and their roles
-    const updatedUser = await updateUserAndRoles(id, { email, username, is_staff, is_admin });
+    const updatedUser = await updateUserAndRoles(id, { email, first_name, last_name, is_seller, is_admin, address, p_country, p_state, p_city });
 
     // Redirect to the user edit page after updating
-    return res.json({redirectTo:`/admin/user/${id}`});
+    return res.json({message:`"${first_name} ${last_name}" succeffully updated their profile`, redirectTo:`/admin/user/${id}`});
   } catch (error) {
-    return res.status(500).json(error);
+    return res.status(500).json({error});
   }
 };
 
