@@ -62,14 +62,23 @@ import { messageAlert } from "./utils.js"
             else {
               try {
                 for (let i of result.errors) {
-                  displayError.insertAdjacentHTML(
-                    'beforeend',
-                    `<li>${i.msg}</li>`
-
-                  )
-                  console.log(i.msg)
+                  if(i.message){
+                    displayError.insertAdjacentHTML(
+                      'beforeend',
+                      `<li>${i.message}</li>`
+  
+                    )
+                  }
+                  else{
+                    displayError.insertAdjacentHTML(
+                      'beforeend',
+                      `<li>${i.msg}</li>`
+  
+                    )
+                  }
                 }
-              } catch {
+              } catch (error) {
+                console.log(error)
                 let errMessage;
                 if (result.detail) errMessage = result.detail
                 else if (result.message) errMessage = result.message;
