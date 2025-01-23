@@ -38,11 +38,13 @@
                             <div class="card-header py-3 d-flex justify-content-between">
                                 <h6 class="m-0 font-weight-bold text-primary">Update User</h6>
                                 <div>
-                                    <div id="delete" data-url="/admin/user/{{user.id}}" type="click" class="btn btn-danger"><i class="fas fa-solid fa-trash-can"></i></div>
+                                    <div id="delete" data-url="/admin/user/{{user.id}}" type="click"
+                                        class="btn btn-danger"><i class="fas fa-solid fa-trash-can"></i></div>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form id="update-user-form" class="user needs-validation" action="/admin/user/{{user.id}}" method="POST" novalidate>
+                                <form id="update-user-form" class="user needs-validation"
+                                    action="/admin/user/{{user.id}}" method="POST" novalidate>
                                     <div class="form-group">
                                         <input type="text" name="first_name" class="form-control form-control-user"
                                             id="exampleInputFirstName" aria-describedby="firstNameHelper"
@@ -53,52 +55,88 @@
                                     <div class="form-group">
                                         <input type="text" name="last_name" class="form-control form-control-user"
                                             id="exampleInputLastName" aria-describedby="lastNameHelper"
-                                            placeholder="Enter Last Name..." value="{{user.last_name}}" >
+                                            placeholder="Enter Last Name..." value="{{user.last_name}}">
                                         <div class="invalid-feedback">Last name is required</div>
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <input type="email" name="email" class="form-control form-control-user"
                                             id="exampleInputEmail" aria-describedby="emailHelp"
                                             placeholder="Enter Email Address..." value="{{user.email}}" required>
                                         <div class="invalid-feedback">Email is required</div>
                                     </div>
-                                
-                                
+
+
                                     <!-- Check if the user has the 'staff' role -->
                                     {{#hasRoleByName user.roles "seller"}}
-                                        <div class="form-check form-check-inline my-3">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="true" name="is_seller" checked>
-                                            <label class="form-check-label" for="inlineCheckbox1">Is Seller?</label>
-                                        </div>
+                                    <div class="form-check form-check-inline my-3">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                                            value="true" name="is_seller" checked>
+                                        <label class="form-check-label" for="inlineCheckbox1">Is Seller?</label>
+                                    </div>
                                     {{else}}
-                                        <div class="form-check form-check-inline my-3">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="true" name="is_seller">
-                                            <label class="form-check-label" for="inlineCheckbox1">Is Seller?</label>
-                                        </div>
+                                    <div class="form-check form-check-inline my-3">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                                            value="true" name="is_seller">
+                                        <label class="form-check-label" for="inlineCheckbox1">Is Seller?</label>
+                                    </div>
                                     {{/hasRoleByName}}
-                                
+
                                     <!-- Check if the user has the 'admin' role -->
                                     {{#hasRoleByName user.roles "admin"}}
-                                        <div class="form-check form-check-inline my-3">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="true" name="is_admin" checked>
-                                            <label class="form-check-label" for="inlineCheckbox2">Is Admin?</label>
-                                        </div>
+                                    <div class="form-check form-check-inline my-3">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
+                                            value="true" name="is_admin" checked>
+                                        <label class="form-check-label" for="inlineCheckbox2">Is Admin?</label>
+                                    </div>
                                     {{else}}
-                                        <div class="form-check form-check-inline my-3">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="true" name="is_admin">
-                                            <label class="form-check-label" for="inlineCheckbox2">Is Admin?</label>
-                                        </div>
+                                    <div class="form-check form-check-inline my-3">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
+                                            value="true" name="is_admin">
+                                        <label class="form-check-label" for="inlineCheckbox2">Is Admin?</label>
+                                    </div>
                                     {{/hasRoleByName}}
-                                
+
                                     <hr>
+
+                                    <div id="addressField" class="mb-3">
+                                        <label for="address" class="form-label">Address</label>
+                                        <textarea name="address" id="address" class="form-control mb-3" rows="2"
+                                            placeholder="Enter your shipping address"></textarea>
+
+                                        <div class="row">
+                                            <div class="col-md-4 form-group mb-3">
+                                                <label for="country_id1" class="form-label">Country</label>
+                                                <select name="p_country" element-id="country"
+                                                    dependent-state-id="state_id1" dependent-city-id="city_id1"
+                                                    id="country_id1" class="countrystatecity form-control">
+                                                    <option value="">select</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 form-group mb-3">
+                                                <label class="form-label" for="state_id1">State</label>
+                                                <select name="p_state" element-id="state" dependent-city-id="city_id1"
+                                                    id="state_id1" id="state_id1" class="countrystatecity form-control">
+                                                    <option value="">select</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 form-group mb-3">
+                                                <label class="form-label" for="countrystatecity">City</label>
+                                                <select name="p_city" element-id="city" id="city_id1"
+                                                    class="countrystatecity form-control">
+                                                    <option value="">select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <ul id="error" class="text-danger col-12"></ul>
-                                
+
                                     <div class="spinner-border col-12 d-none" id="status" role="status">
                                         <span class="sr-only">Loading...</span>
                                     </div>
-                                
-                                    <button type="submit" id="btn" class="btn btn-primary btn-user btn-block">Update</button>
+
+                                    <button type="submit" id="btn"
+                                        class="btn btn-primary btn-user btn-block">Update</button>
                                     <hr>
                                 </form>
                             </div>
@@ -118,7 +156,12 @@
 </div>
 <!-- End of Page Wrapper -->
 
-
+<script type="text/javascript" src="js/countrystatecity.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.countrystatecity').countrystatecity();
+    });
+</script>
 <!-- Core plugin JavaScript-->
 <script type="module" src="js/user.js"></script>
 
