@@ -60,7 +60,7 @@ export const fetchAllUsers = async (page = 1, limit = 10) => {
   
 
 // Create a new user
-export const createNewUser = async ({ first_name, last_name, email, password, roleIds = [] }) => {
+export const createNewUser = async ({ first_name, last_name, email, password, roleIds = [], address, p_country, p_state, p_city }) => {
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -72,6 +72,19 @@ export const createNewUser = async ({ first_name, last_name, email, password, ro
 
     await newUser.setRoles(allRoles);
 
+    // Only update the address if any of the address fields are not empty
+    if (address || p_country || p_state || p_city) {
+      // Fetch the existing address by userId
+      await db.Address.create({
+        userId: newUser.id,
+        street_address: address,
+        city: p_city,
+        state: p_state,
+        country: p_country,
+      });
+    }
+
+
     const createdUser = await fetchUserById(newUser.id);
     return createdUser;
   } catch (error) {
@@ -80,7 +93,6 @@ export const createNewUser = async ({ first_name, last_name, email, password, ro
 };
 
 // Update a user and their roles
-// Helper function to update user and their roles
 export const updateUserAndRoles = async (id, { email, first_name, last_name, is_seller, is_admin, address, p_country, p_state, p_city }) => {
   try {
     // Fetch the user by ID
@@ -106,16 +118,46 @@ export const updateUserAndRoles = async (id, { email, first_name, last_name, is_
     // Update user roles
     await user.setRoles(roleIds); // This updates the user's roles in the database
 
-    //update user address
+    // Only update the address if any of the address fields are not empty
+    if (address || p_country || p_state || p_city) {
+      // Fetch the existing address by userId
+      const existingAddress = await db.Address.findOne({ where: { userId: id } });
 
-    // Return the updated user with roles
-    const updatedUser = await db.User.findByPk(id, {
-      include: {
-        model: db.Role,
-        as: 'roles',
-        through: { attributes: [] } // Exclude join table attributes
+      if (existingAddress) {
+        // Update the existing address if it exists
+        await existingAddress.update({
+          street_address: address || existingAddress.street_address,
+          city: p_city || existingAddress.city,
+          state: p_state || existingAddress.state,
+          country: p_country || existingAddress.country,
+        });
+      } else {
+        // If no address exists, create a new address (optional, if you want to handle this case)
+        await db.Address.create({
+          userId: id,
+          street_address: address,
+          city: p_city,
+          state: p_state,
+          country: p_country,
+        });
       }
+    }
+
+    // Return the updated user with roles and address
+    const updatedUser = await db.User.findByPk(id, {
+      include: [
+        {
+          model: db.Role,
+          as: 'roles',
+          through: { attributes: [] }, // Exclude join table attributes
+        },
+        {
+          model: db.Address, // Include the user's address
+          as: 'address',
+        },
+      ],
     });
+
     return updatedUser;
   } catch (error) {
     throw error;
