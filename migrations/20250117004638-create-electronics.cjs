@@ -1,45 +1,37 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Electronics', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
       },
       brand: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       model: {
         type: Sequelize.STRING,
-      },
-      condition: {
-        type: Sequelize.STRING,
-      },
-      warranty: {
-        type: Sequelize.STRING,
-      },
-      listingId: {
-        type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
-          model: 'Listings',
-          key: 'id',
-        },
-        onDelete: 'CASCADE',
+      },
+      warranty_period: {
+        type: Sequelize.INTEGER, // Warranty in months
+        allowNull: true,
       },
       createdAt: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
       },
       updatedAt: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
       },
     });
   },
+
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Electronics');
   },

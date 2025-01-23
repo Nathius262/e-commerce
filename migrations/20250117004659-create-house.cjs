@@ -1,45 +1,37 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Houses', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
       },
-      property_type: {
+      location: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       size: {
-        type: Sequelize.FLOAT,
+        type: Sequelize.FLOAT, // Size in square meters
+        allowNull: false,
       },
-      bedrooms: {
-        type: Sequelize.INTEGER,
-      },
-      bathrooms: {
-        type: Sequelize.INTEGER,
-      },
-      listingId: {
+      number_of_rooms: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
-          model: 'Listings',
-          key: 'id',
-        },
-        onDelete: 'CASCADE',
       },
       createdAt: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
       },
       updatedAt: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
       },
     });
   },
+
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Houses');
   },
