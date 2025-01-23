@@ -32,8 +32,16 @@ import { messageAlert } from "./utils.js"
           const form = event.target;
           const formData = new FormData(form);
           const url = form.action;
-          const formDataObj = JSON.stringify(Object.fromEntries(formData))
+          let formDataObj = Object.fromEntries(formData)
 
+          if(formDataObj.p_country || formDataObj.p_city || formDataObj.p_state){
+            formDataObj.p_country = $('#country_id1 option:selected').data('address_name') || null
+            formDataObj.p_city = $('#city_id1 option:selected').data('address_name') || null
+            formDataObj.p_state = $('#state_id1 option:selected').data('address_name') || null
+          }
+
+          console.log(formDataObj)
+          formDataObj = JSON.stringify(formDataObj)
           try {
 
             let method;
