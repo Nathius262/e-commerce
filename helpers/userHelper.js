@@ -5,11 +5,17 @@ import bcrypt from 'bcrypt';
 export const fetchUserById = async (id) => {
   try {
     const user = await db.User.findByPk(id, {
-      include: {
+      include: [{
         model: db.Role,
         as: 'roles',
         through: { attributes: [] } // Exclude join table attributes
+      },
+      {
+        model:db.Address,
+        as:'address',
+        attributes: ['street_address', 'city', 'state', 'country']   
       }
+    ]
     });
 
     if (!user) throw new Error('User not found');
@@ -75,7 +81,7 @@ export const createNewUser = async ({ first_name, last_name, email, password, ro
 
 // Update a user and their roles
 // Helper function to update user and their roles
-export const updateUserAndRoles = async (id, { email, first_name, last_name, is_seller, is_admin }) => {
+export const updateUserAndRoles = async (id, { email, first_name, last_name, is_seller, is_admin, address, p_country, p_state, p_city }) => {
   try {
     // Fetch the user by ID
     const user = await db.User.findByPk(id);
@@ -99,6 +105,8 @@ export const updateUserAndRoles = async (id, { email, first_name, last_name, is_
 
     // Update user roles
     await user.setRoles(roleIds); // This updates the user's roles in the database
+
+    //update user address
 
     // Return the updated user with roles
     const updatedUser = await db.User.findByPk(id, {
