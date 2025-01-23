@@ -16,18 +16,28 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: 'roleId',
         as: 'roles',
       });
-      User.hasMany(models.Listing, { foreignKey: 'userId' });
-      User.hasMany(models.Transaction, { foreignKey: 'userId' });
-      User.hasMany(models.Review, { foreignKey: 'userId' });
-      User.hasOne(models.Address, { foreignKey: 'userId' });
+      User.hasMany(models.Listing, { foreignKey: 'userId', as:'listings' });
+      User.hasMany(models.Transaction, { foreignKey: 'userId', as:'transactions' });
+      User.hasMany(models.Review, { foreignKey: 'userId', as:'reviews' });
+      User.hasOne(models.Address, { foreignKey: 'userId', as:'address' });
     }
   }
   User.init({
     first_name: DataTypes.STRING,
     last_name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    phone_number: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      unique:true,
+      allowNull:false
+    },
+    password: {
+      type:DataTypes.STRING,
+      allowNull:false
+    },
+    phone_number: {
+      type: DataTypes.STRING,
+      allowNull:true,
+    },
   }, {
     sequelize,
     modelName: 'User',

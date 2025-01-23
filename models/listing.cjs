@@ -1,7 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Listing extends Model {
     /**
@@ -10,30 +9,69 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
-      Listing.belongsTo(models.User, { foreignKey: 'userId' });
-      Listing.belongsTo(models.Category, { foreignKey: 'categoryId' });
-      Listing.hasMany(models.Review, { foreignKey: 'listingId' });
-      Listing.hasMany(models.OrderItem, { foreignKey: 'listingId' });
+      // General associations
+      Listing.belongsTo(models.User, { foreignKey: 'userId', as: 'owner' }); // The listing owner
+      Listing.belongsTo(models.Category, { foreignKey: 'categoryId', as: 'category' }); // Category of the listing
+      Listing.hasMany(models.Review, { foreignKey: 'listingId', as: 'reviews' }); // User reviews for the listing
+      Listing.hasMany(models.OrderItem, { foreignKey: 'listingId', as: 'orderItems' }); // Orders associated with this listing
 
-      //extended categories
-      Listing.hasOne(models.Electronics, { foreignKey: 'listingId', as: 'electronics' });
-      Listing.hasOne(models.House, { foreignKey: 'listingId', as: 'house' });
-      Listing.hasOne(models.Car, { foreignKey: 'listingId', as: 'car' });
+      // Polymorphic associations for category-specific details
+      Listing.belongsTo(models.Electronics, { foreignKey: 'category_id', constraints: false, as: 'electronics' });
+      Listing.belongsTo(models.House, { foreignKey: 'category_id', constraints: false, as: 'house' });
+      Listing.belongsTo(models.Car, { foreignKey: 'category_id', constraints: false, as: 'car' });
     }
   }
+
   Listing.init({
-    title: DataTypes.STRING,
-    description: DataTypes.TEXT,
-    price: DataTypes.FLOAT,
-    status: DataTypes.STRING,
-    images: DataTypes.STRING,
-    location: DataTypes.STRING,
-    categoryId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    price: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'active', // Possible values: active, sold, inactive
+    },
+    images: {
+      type: DataTypes.STRING,
+      allowNull: true, // This could store comma-separated URLs for images
+      get() {
+        const rawValue = this.getDataValue('images');
+        return rawValue ? rawValue.split(',') : [];
+      },
+      set(value) {
+        this.setDataValue('images', value.join(','));
+      },
+    },
+    categoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    category_id: {
+      type: DataTypes.INTEGER, // Polymorphic ID for category-specific details
+      allowNull: false,
+    },
+    category_type: {
+      type: DataTypes.STRING, // Polymorphic type (e.g., 'Electronics', 'House', 'Car')
+      allowNull: false,
+    },
   }, {
     sequelize,
     modelName: 'Listing',
+    //tableName: 'listings', // Ensures table name consistency
   });
+
   return Listing;
 };

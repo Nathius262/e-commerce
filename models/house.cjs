@@ -1,28 +1,35 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class House extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
-      House.belongsTo(models.Listing, { foreignKey: 'listingId', as: 'listing' });
+      House.hasMany(models.Listing, { foreignKey: 'category_id', constraints: false, as: 'listings' });
     }
   }
+
   House.init({
-    property_type: DataTypes.STRING,
-    size: DataTypes.FLOAT,
-    bedrooms: DataTypes.INTEGER,
-    bathrooms: DataTypes.INTEGER,
-    listingId: DataTypes.INTEGER
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    location: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    size: {
+      type: DataTypes.FLOAT, // Size in square meters
+      allowNull: false,
+    },
+    number_of_rooms: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   }, {
     sequelize,
     modelName: 'House',
   });
+
   return House;
 };

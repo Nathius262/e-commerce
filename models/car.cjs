@@ -1,29 +1,44 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Car extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
-      Car.belongsTo(models.Listing, { foreignKey: 'listingId', as: 'listing' });
+      Car.hasMany(models.Listing, { foreignKey: 'category_id', constraints: false, as: 'listings' });
     }
   }
+
   Car.init({
-    make: DataTypes.STRING,
-    model: DataTypes.STRING,
-    year: DataTypes.INTEGER,
-    mileage: DataTypes.INTEGER,
-    condition: DataTypes.STRING,
-    listingId: DataTypes.INTEGER
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    brand: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    model: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    mileage: {
+      type: DataTypes.FLOAT, // Mileage in km or miles
+      allowNull: false,
+    },
+    engine_type: {
+      type: DataTypes.STRING, // E.g., Petrol, Diesel, Electric
+      allowNull: false,
+    },
+    model_year: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+
   }, {
     sequelize,
     modelName: 'Car',
   });
+
   return Car;
 };

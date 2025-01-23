@@ -1,28 +1,35 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Electronics extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
-      Electronics.belongsTo(models.Listing, { foreignKey: 'listingId', as: 'listing' });
+      Electronics.hasMany(models.Listing, { foreignKey: 'category_id', constraints: false, as: 'listings' });
     }
   }
+
   Electronics.init({
-    brand: DataTypes.STRING,
-    model: DataTypes.STRING,
-    condition: DataTypes.STRING,
-    warranty: DataTypes.STRING,
-    listingId: DataTypes.INTEGER
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    brand: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    model: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    warranty_period: {
+      type: DataTypes.INTEGER, // Warranty in months
+      allowNull: true,
+    },
   }, {
     sequelize,
     modelName: 'Electronics',
   });
+
   return Electronics;
 };
