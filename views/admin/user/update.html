@@ -99,18 +99,20 @@
 
                                     <hr>
 
+                                    
                                     <div id="addressField" class="mb-3">
                                         <label for="address" class="form-label">Address</label>
                                         <textarea name="address" id="address" class="form-control mb-3" rows="2"
-                                            placeholder="Enter your shipping address"></textarea>
+                                            placeholder="Enter your shipping address">{{user.address.street_address}}</textarea>
 
                                         <div class="row">
+                                            
                                             <div class="col-md-4 form-group mb-3">
                                                 <label for="country_id1" class="form-label">Country</label>
                                                 <select name="p_country" element-id="country"
                                                     dependent-state-id="state_id1" dependent-city-id="city_id1"
                                                     id="country_id1" class="countrystatecity form-control">
-                                                    <option value="">select</option>
+                                                    <option value=""></option>
                                                 </select>
                                             </div>
                                             <div class="col-md-4 form-group mb-3">
@@ -159,9 +161,15 @@
 <script type="text/javascript" src="js/countrystatecity.js"></script>
 <script>
     $(document).ready(function () {
+        // Initialize the plugin for country, state, and city
         $('.countrystatecity').countrystatecity();
     });
 </script>
+
+
+
+
+
 <!-- Core plugin JavaScript-->
 <script type="module" src="js/user.js"></script>
 
