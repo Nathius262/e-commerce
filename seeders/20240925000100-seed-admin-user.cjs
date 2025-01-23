@@ -2,11 +2,11 @@
 const adminSeeder = require('./admin-seeder.cjs'); // Import the reusable seeder
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  async up(queryInterface, Sequelize) {
     await adminSeeder.seedAdmin(queryInterface, Sequelize);
   },
 
-  down: async (queryInterface, Sequelize) => {
+  async down(queryInterface, Sequelize) {
     // Remove the user-role associations
     await queryInterface.bulkDelete('UserRole', {
       userId: {
