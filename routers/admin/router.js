@@ -7,6 +7,7 @@ import {renderAdminDashboard} from '../../controllers/admin/rootController.js';
 import  * as user from '../../controllers/admin/userController.js';
 import * as role from '../../controllers/admin/roleController.js';
 import * as category from '../../controllers/admin/categoryController.js'
+import * as electronic from '../../controllers/admin/electronicController.js'
 
 
 const router = Router()
@@ -85,6 +86,23 @@ router.route('/category/:id')
     .put(category.updateCategory)
     .delete(category.deleteCategory);
 
+
+//////////////////////
+//////////////////////
+// ELECTRONIC ROUTER //
+//////////////////////
+//////////////////////
+router.route('/electronic')
+.get(electronic.getAllElectronics)
+.post(electronic.createNewElectronic);
+
+
+router.get('/electronic/create', electronic.renderElectronicForm);
+
+router.route('/electronic/:id')
+    .get(electronic.getElectronicById)
+    .put(electronic.updateElectronic)
+    .delete(electronic.deleteElectronic);
 
 
 export default router;
