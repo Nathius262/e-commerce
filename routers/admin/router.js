@@ -8,6 +8,7 @@ import  * as user from '../../controllers/admin/userController.js';
 import * as role from '../../controllers/admin/roleController.js';
 import * as category from '../../controllers/admin/categoryController.js'
 import * as electronic from '../../controllers/admin/electronicController.js'
+import * as car from '../../controllers/admin/carController.js'
 
 
 const router = Router()
@@ -104,5 +105,23 @@ router.route('/electronic/:id')
     .put(electronic.updateElectronic)
     .delete(electronic.deleteElectronic);
 
+
+    
+//////////////////////
+//////////////////////
+// CAR ROUTE /////////
+//////////////////////
+//////////////////////
+router.route('/car')
+.get(car.getAllCars)
+.post(car.createNewCar);
+
+
+router.get('/car/create', car.renderCarForm);
+
+router.route('/car/:id')
+    .get(car.getCarById)
+    .put(car.updateCar)
+    .delete(car.deleteCar);
 
 export default router;
