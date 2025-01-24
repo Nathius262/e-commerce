@@ -68,7 +68,7 @@ router.route('/role/:id')
     .delete(role.deleteRole);
 
 
-    //////////////////////
+//////////////////////
 //////////////////////
 /// CATEGORY ROUTER //
 //////////////////////
@@ -76,7 +76,14 @@ router.route('/role/:id')
 router.route('/category')
 .get(category.getAllCategories)
 .post(category.createCategoryController);
+
+
 router.get('/category/create', category.renderCategoryForm);
+
+router.route('/category/:id')
+    .get(category.getCategoryById)
+    .put(category.updateCategory)
+    .delete(category.deleteCategory);
 
 
 
