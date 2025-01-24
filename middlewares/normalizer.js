@@ -5,7 +5,7 @@ const removeTrailingSlash = (req, res, next) => {
     const allowTrailingSlash = [
       '/admin/', '/admin/cart/', '/admin/user/', '/admin/role/',
       '/admin/product/', '/admin/order/', '/admin/category/',
-      '/admin/electronic/'
+      '/admin/electronic/', '/admin/car/'
     ];
   
     if (req.path !== '/' && req.path.endsWith('/') && !allowTrailingSlash.includes(req.path)) {
