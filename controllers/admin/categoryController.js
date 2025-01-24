@@ -28,11 +28,15 @@ export async function createCategoryController(req, res) {
     const { name, description } = req.body;
 
 
-    // Call the helper to create the category
-    const newCategory = await categoryHelper.createCategory({ name, description });
+    if(name || description){
+      const newCategory = await categoryHelper.createCategory({ name, description });
+    }
+    else{
+      res.status(400).json({message:'fields required!'})
+    }
     
     // Return success response
-    return res.status(201).json({ message: 'Category created successfully', category: newCategory, redirectTo:"/admin/category/" });
+    return res.status(201).json({ message: 'Category created successfully', redirectTo:"/admin/category/" });
   } catch (error) {
     // Log the detailed error to get more information
     console.error("Error in createCategoryController:", error);
