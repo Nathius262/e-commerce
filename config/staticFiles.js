@@ -17,5 +17,6 @@ app.use('/admin/role', express.static(path.join(__dirname, '..', 'public')));
 app.use('/admin/user', express.static(path.join(__dirname, '..', 'public')));
 app.use('/admin/listing', express.static(path.join(__dirname, '..', 'public')));
 app.use('/admin/category', express.static(path.join(__dirname, '..', 'public')));
+app.use('/admin/electronic', express.static(path.join(__dirname, '..', 'public')));
 
 export default app;
