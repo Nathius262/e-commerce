@@ -22,12 +22,12 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Electronic</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Car</h1>
                 </div>
 
                 <!-- Content Row -->
                 <div class="row">
-                    {{> admin/nav/electronic}}
+                    {{> admin/nav/car}}
                 </div>
 
                 <!-- Content Row -->
@@ -36,16 +36,16 @@
                         <!-- Approach -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3 d-flex justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Update Category</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Update Car</h6>
                                 <div>
-                                    <div id="delete" data-url="/admin/electronic/{{electronic.id}}" type="click" class="btn btn-danger delete-user-btn"><i class="fas fa-solid fa-trash-can"></i></div>
+                                    <div id="delete" data-url="/admin/car/{{car.id}}" type="click" class="btn btn-danger delete-user-btn"><i class="fas fa-solid fa-trash-can"></i></div>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form id="update-user-form" class="user needs-validation" action="/admin/electronic/{{electronic.id}}"
+                                <form id="update-user-form" class="user needs-validation" action="/admin/car/{{car.id}}"
                                     method="POST" novalidate>
                                     <div class="form-group">
-                                        <input type="text" name="brand" value="{{electronic.brand}}" class="form-control form-control-user" id="exampleInputbrand"
+                                        <input type="text" name="brand" value="{{car.brand}}" class="form-control form-control-user" id="exampleInputbrand"
                                           placeholder="Enter Electronic Brand Name..." required>
                                         <div class="invalid-feedback">
                                           Brand Name is required
@@ -53,7 +53,7 @@
                                       </div>
                     
                                       <div class="form-group">
-                                        <input type="text" name="model" value="{{electronic.model}}" class="form-control form-control-user" id="exampleInputmodel"
+                                        <input type="text" name="model" value="{{car.model}}" class="form-control form-control-user" id="exampleInputmodel"
                                           placeholder="Enter Model Name..." required>
                                         <div class="invalid-feedback">
                                           Model Name is required
@@ -61,10 +61,26 @@
                                       </div>
                     
                                       <div class="form-group">
-                                        <input type="text" name="warranty_period" value="{{electronic.warranty_period}}" class="form-control form-control-user" id="exampleInputwarranty"
-                                          placeholder="Enter Electronic Warant Period...">
+                                        <input type="date" name="model_year" value="{{car.model_year}}" class="form-control form-control-user" id="exampleInputmodelyear"
+                                          placeholder="Enter Model Year..." >
                                         <div class="invalid-feedback">
-                                          required
+                                          Model Year is required
+                                        </div>
+                                      </div>
+                    
+                                      <div class="form-group">
+                                        <input type="text" name="engine_type" value="{{car.engine_type}}" class="form-control form-control-user" id="engine_type"
+                                          placeholder="Enter engine type..." >
+                                        <div class="invalid-feedback">
+                                          Name is required
+                                        </div>
+                                      </div>
+                    
+                                      <div class="form-group">
+                                        <input type="number" name="mileage" value="{{car.mileage}}" class="form-control form-control-user" id="mileage"
+                                          placeholder="Enter mileage..." >
+                                        <div class="invalid-feedback">
+                                          mileage is required
                                         </div>
                                       </div>
 
