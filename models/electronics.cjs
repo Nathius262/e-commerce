@@ -2,13 +2,13 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Electronics extends Model {
+  class Electronic extends Model {
     static associate(models) {
-      Electronics.hasMany(models.Listing, { foreignKey: 'category_id', constraints: false, as: 'listings' });
+      Electronic.hasMany(models.Listing, { foreignKey: 'category_id', constraints: false, as: 'listings' });
     }
   }
 
-  Electronics.init({
+  Electronic.init({
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -28,8 +28,8 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     sequelize,
-    modelName: 'Electronics',
+    modelName: 'Electronic',
   });
 
-  return Electronics;
+  return Electronic;
 };

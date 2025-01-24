@@ -16,9 +16,9 @@ module.exports = (sequelize, DataTypes) => {
       Listing.hasMany(models.OrderItem, { foreignKey: 'listingId', as: 'orderItems' }); // Orders associated with this listing
 
       // Polymorphic associations for category-specific details
-      Listing.belongsTo(models.Electronics, { foreignKey: 'category_id', constraints: false, as: 'electronics' });
-      Listing.belongsTo(models.House, { foreignKey: 'category_id', constraints: false, as: 'house' });
-      Listing.belongsTo(models.Car, { foreignKey: 'category_id', constraints: false, as: 'car' });
+      Listing.belongsTo(models.Electronic, { foreignKey: 'category_id', constraints: false, as: 'electronics' });
+      Listing.belongsTo(models.House, { foreignKey: 'category_id', constraints: false, as: 'houses' });
+      Listing.belongsTo(models.Car, { foreignKey: 'category_id', constraints: false, as: 'cars' });
     }
   }
 
@@ -64,7 +64,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     category_type: {
-      type: DataTypes.STRING, // Polymorphic type (e.g., 'Electronics', 'House', 'Car')
+      type: DataTypes.STRING, // Polymorphic type (e.g., 'Electronic', 'House', 'Car')
       allowNull: false,
     },
   }, {
