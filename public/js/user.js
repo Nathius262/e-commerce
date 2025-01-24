@@ -162,8 +162,8 @@ import { messageAlert } from "./utils.js"
           if (response.ok) {
             messageAlert(
               (title = 'Alert'),
-              (message = 'User has been deleted'),
-              (redirectTo = result.redirectTo || '/admin'), // Fallback to homepage if redirectTo is undefined
+              (message = 'Record has been deleted'),
+              (redirectTo = window.location.pathname || '/admin'), // Fallback to homepage if redirectTo is undefined              || '/admin'), // Fallback to homepage if redirectTo is undefined
               (classType = 'text-danger'),
               (btnType = 'btn-danger')
             );
@@ -179,7 +179,7 @@ import { messageAlert } from "./utils.js"
           }
         } catch (error) {
           console.error('Error occurred while deleting user:', error);
-          displayError.insertAdjacentHTML('beforeend', `<li>Failed to delete user. Please try again later.</li>`);
+          displayError.insertAdjacentHTML('beforeend', `<li>Failed to delete record. Please try again later.</li>`);
         } finally {
           // Remove the spinner and re-enable the button after the request finishes
           i.innerHTML = 'Delete'; // Restore button text
