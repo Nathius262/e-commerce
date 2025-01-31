@@ -6,7 +6,7 @@ export const getAllCars = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10;
 
   try {
-    const { cars, totalItems, totalPages, currentPage } = await carHelper.getAllElectronics(page, limit);
+    const { cars, totalItems, totalPages, currentPage } = await carHelper.getAllCars(page, limit);
 
     res.render('./admin/car/list', {
       cars,
