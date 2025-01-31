@@ -25,11 +25,13 @@ export const getAllHouses = async (req, res) => {
 // Controller to create a new house
 export const createNewHouse= async (req, res) => {
   try {
-    const { brand, model, model_year, mileage, engine_type } = req.body;
+    const { location, size, number_0f_rooms } = req.body;
+
+    console.log(req.body)
 
 
-    if(brand || model || model_year || mileage || engine_type){
-      const newHouse = await houseHelper.createHouse({ brand, model, model_year, mileage, engine_type });
+    if(location || size || number_0f_rooms){
+      const newHouse = await houseHelper.createHouse({ location, size, number_0f_rooms });
     }
     else{
       res.status(400).json({message:'fields required!'})
@@ -64,10 +66,10 @@ export const getHouseById = async (req, res) => {
 export const updateHouse= async (req, res)=>{
   try {
     const {id} = req.params
-    const { brand, model, model_year, mileage, engine_type } = req.body;
+    const { location, size, number_0f_rooms } = req.body;
 
-    if(brand || model || model_year || mileage || engine_type){
-      const updatedData = await houseHelper.updateHouseById(id, brand, model, model_year, mileage, engine_type);
+    if(location || size || number_0f_rooms){
+      const updatedData = await houseHelper.updateHouseById(id, location, size, number_0f_rooms);
     }
     
     // Return success response
